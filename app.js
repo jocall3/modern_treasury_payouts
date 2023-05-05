@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import ModernTreasury from 'modern-treasury';
 
 // Your organization id and API key here:
-const ORGANIZATION_ID = '<your orgabization id here>';
+const ORGANIZATION_ID = '<your organziation id here>';
 const API_KEY = '<your API key here>';
 const modernTreasury = new ModernTreasury({
   apiKey: API_KEY,
