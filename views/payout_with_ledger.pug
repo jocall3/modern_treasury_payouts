@@ -1,0 +1,26 @@
+extends base.pug
+
+block content
+  h3 Submit a payout
+
+  form(action="/pay-with-ledger", method="post")
+    label Send from this internal account
+    select(name="internalAccount")
+      each account in internalAccounts
+        option(value=account.id) #{account.party_name}
+    br
+    label Send to this external account
+    select(name="externalAccount")
+      each account in externalAccounts
+        option(value=account.id) #{account.party_name}  
+    br
+    label Send this amount
+    input(type="number", name="amount" placeholder="Enter an amount")
+    br
+    label Record transaction to on this ledger
+    br
+    label Description
+    input(type="text", name="description" placeholder="Enter a description")
+    br
+    input(type="submit", name="Done")
+

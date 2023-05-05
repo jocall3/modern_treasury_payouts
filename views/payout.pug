@@ -1,0 +1,20 @@
+extends base.pug
+
+block content
+  h3 Submit a payout
+
+  form(action="/pay", method="post")
+    label Send from this internal account
+    select(name="internalAccount")
+      each account in internalAccounts
+        option(value=account.id) #{account.party_name}
+    br
+    label Send to this external account
+    select(name="externalAccount")
+      each account in externalAccounts
+        option(value=account.id) #{account.party_name}  
+    br
+    label Send this amount
+    input(type="number", name="amount" placeholder="Amount")
+    br
+    input(type="submit", name="Done")

@@ -1,0 +1,80 @@
+extends base.pug
+
+block content
+  h3 Personal and Bank Details 
+  h4 Please enter your personal details and bank information for verification
+
+  form(action="/onboard", method="post")
+    label First name
+    input(type="text" name="first_name" value="Harry")
+    br
+
+    label Last name
+    input(type="text" name="last_name" value="Potter")
+    br
+
+    label Date of birth
+    input(type="date" name="date_of_birth" value="1990-01-02")
+    br
+
+    label Phone number
+    input(type="phone" name="phone_number" value="+11111111111")
+    br
+    
+    label Email
+    input(type="email" name="email" value="harry@hogwarts.edu")
+    br
+    br
+
+    label Address line 1
+    input(type="text" name="address_line1" value="Hogsmeade Ave")
+    br
+    
+    label Address line 2
+    input(type="text" name="address_line2" value="")
+    br
+    
+    label Address locality
+    input(type="text" name="address_locality" value="San Francisco")
+    br
+    
+    label Address region
+    input(type="text" name="address_region" value="CA")
+    br
+    
+    label Address postal code
+    input(type="text" name="address_postal_code" value="94108")
+    br
+    
+    label Address country
+    input(type="text" name="address_country" value="USA")
+    br
+    br
+
+    label Tax identifier
+    input(type="text" name="taxpayer_identifier" value="123456789")
+    br
+    br
+
+    label Account number
+    input(type="text" name="account_number" value="1111111111")
+    br
+    
+    label Account number type
+    input(type="text" name="account_number_type" value="other")
+    br
+
+    label Routing number
+    input(type="text" name="routing_number" value="021000021")
+    br
+    
+    label Routing number type
+    input(type="text" name="routing_number_type" value="aba")
+    br
+
+    label Account type
+    input(type="text" name="account_type" value="checking")
+    br
+    br
+    input(type="submit", name="Done")
+    br
