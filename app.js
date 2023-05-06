@@ -28,13 +28,20 @@ app.get('/onboarding', (request, response) => {
 });
 
 app.get('/payout', async (request, response) => {
+
+  // Internal accounts are generally accounts in your name. 
+  // We'll get the accounts that support ACH transfers.
   const internalAccounts = [];
-  for await (const internalAccount of modernTreasury.internalAccounts.list({payment_type: 'ach'})) {
+  for await (const internalAccount of modernTreasury.internalAccounts.list({
+    payment_type: 'ach'
+  })) {
     internalAccounts.push(internalAccount);
   }
 
+  // External accounts are accounts that are not in your name, such as a client
+  // or freelancer.
   const externalAccounts = [];
-  for await (const externalAccount of modernTreasury.externalAccounts.list({payment_type: 'ach'})) {
+  for await (const externalAccount of modernTreasury.externalAccounts.list()) {
     externalAccounts.push(externalAccount);
   }
 
@@ -45,11 +52,18 @@ app.get('/payout', async (request, response) => {
 });
 
 app.get('/payout-with-ledger', async (request, response) => {
+  
+  // Internal accounts are generally accounts in your name.
+  // We'll get the accounts that support ACH transfers.
   const internalAccounts = [];
-  for await (const internalAccount of modernTreasury.internalAccounts.list({payment_type: 'ach'})) {
+  for await (const internalAccount of modernTreasury.internalAccounts.list({
+    payment_type: 'ach'
+  })) {
     internalAccounts.push(internalAccount);
   }
 
+  // External accounts are accounts that are not in your name, such as a client
+  // or freelancer.
   const externalAccounts = [];
   for await (const externalAccount of modernTreasury.externalAccounts.list()) {
     externalAccounts.push(externalAccount);
@@ -64,13 +78,18 @@ app.get('/payout-with-ledger', async (request, response) => {
 // FORM REQUESTS
 
 app.post('/onboard', async (request, response) => {
+  
+  // The MT API does not seem to support ledgers yet, so we'll use a fetch()
+  // request.
   const url = 'https://app.moderntreasury.com/api/user_onboardings';
 
   const headers = new Headers({
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + Buffer.from(ORGANIZATION_ID + ':' + API_KEY).toString('base64')
+    'Authorization': 'Basic ' + Buffer.from(ORGANIZATION_ID 
+      + ':' + API_KEY).toString('base64')
   });
 
+  // Example of what a request body might look like.
   const body = JSON.stringify({
     status: 'processing',
     flow_alias: 'my-test-flow',
@@ -120,6 +139,8 @@ app.post('/onboard', async (request, response) => {
 });
 
 app.post('/pay', async (request, response) => {
+  
+  // Create a ACH transfer between the selected internal and external account.
   const paymentOrder = await modernTreasury.paymentOrders.create({
     'type': 'ach',
     'amount': request.body.amount,
@@ -133,12 +154,16 @@ app.post('/pay', async (request, response) => {
 });
 
 app.post('/pay-with-ledger', async (request, response) => {
+
+  // A ledger must reference a credit and debit account.
+  // Create these accounts in the Dashboard.
   const CREDIT_LEDGER_ACCOUNT_ID = '<credit ledger account id>';
   const DEBIT_LEDGER_ACCOUNT_ID = '<debit ledger account id>';
 
+  // Example of a ledger transaction object to be sent to the ledger.
   const ledgerTransactionObject = {
     description: request.body.description,
-    status: 'posted',
+    status: 'pending',
     ledger_entries: [
       {
         amount: request.body.amount, 
@@ -153,8 +178,10 @@ app.post('/pay-with-ledger', async (request, response) => {
     ]
   };
 
+  // Send the payment order with the ledger transaction object to instantly 
+  // create the ledger entry.
   const paymentOrder = await modernTreasury.paymentOrders.create({
-    'type': "ach",
+    'type': 'ach',
     'amount': request.body.amount,
     'direction': 'credit',
     'currency': 'USD',
@@ -168,12 +195,15 @@ app.post('/pay-with-ledger', async (request, response) => {
 
 // HOOKS
 
+// This endpoint is notified when a new account has been onboarded.
 app.post('/onboarding-hook', (request, response) => {
   if (request.body.data.status === 'approved') console.log('Approved!');
  
   response.status(200).end();
  });    
 
+// This endpoint when a payment has been returned, and as is progresses through
+// the return process pipeline.
 app.post('/return-hook', (request, response) => {
   const status = request.body.data.status;    
   const amount = request.body.data.amount;
@@ -195,7 +225,9 @@ app.post('/return-hook', (request, response) => {
 
   response.status(200).end()
 });      
-  
+
+// This endpoint when a payment has been reversed, and as is progresses through
+// the reversal process pipeline.
 app.post('/reversal-hook', (request, response) => {
   const status = request.body.data.status;    
   const paymentOrderId = request.body.data.payment_order_id;

@@ -7,6 +7,8 @@ This is an example of how to create a a simple payout system with the the Modern
  - A ledger for tracking transactions and account balances in real time
  - A notification system for returns and reversals via webhooks
 
+ For simplicity I've all of the relevant API code in app.js.
+
 ## Tech stack
 I'm using a dead simple tech stack to minimize the overhead of learning the latest framework/library/package manager:
 
