@@ -1,6 +1,6 @@
 # Building a production-ready payout process with the Modern Treasury API
 
-Example of how to create a a simple payout system with the the Modern Treasury API with these features:
+This is an example of how to create a a simple payout system with the the Modern Treasury API with these features:
 
  - A basic payout flow that moves money between internal accounts and external accounts via Automated Clearing House (ACH) transfers  
  - A system for onboarding and verifying new external accounts
