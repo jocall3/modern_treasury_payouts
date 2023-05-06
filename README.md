@@ -16,7 +16,7 @@ I'm using a dead simple tech stack to minimize the overhead of learning the late
  - Express (4.18.5)
  - Pug (3.0.2)
  - Nodemon (for dev)
- - [The Modern Treasury SDK] (https://github.com/Modern-Treasury/modern-treasury-node)
+ - [The Modern Treasury SDK](https://github.com/Modern-Treasury/modern-treasury-node)
 
 ## Installation
 
