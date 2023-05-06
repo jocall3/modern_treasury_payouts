@@ -34,7 +34,7 @@ app.get('/payout', async (request, response) => {
   }
 
   const externalAccounts = [];
-  for await (const externalAccount of modernTreasury.externalAccounts.list()) {
+  for await (const externalAccount of modernTreasury.externalAccounts.list({payment_type: 'ach'})) {
     externalAccounts.push(externalAccount);
   }
 
@@ -169,14 +169,10 @@ app.post('/pay-with-ledger', async (request, response) => {
 // HOOKS
 
 app.post('/onboarding-hook', (request, response) => {
-  const status = request.body.data.status;
-  const firstName = request.body.data.party_details.first_name;
-  const lastName = request.body.data.party_details.first_name;
-  
-  if (status === 'approved') console.log(`${firstName} ${lastName}' has been approved!`);
-
+  if (request.body.data.status === 'approved') console.log('Approved!');
+ 
   response.status(200).end();
-});      
+ });    
 
 app.post('/return-hook', (request, response) => {
   const status = request.body.data.status;    
@@ -221,5 +217,5 @@ app.post('/reversal-hook', (request, response) => {
 });
 
 app.listen(3000, () => {
-  console.log('server running at 3000')
+  console.log('server running at 3000');
 });
