@@ -1,6 +1,6 @@
 # Building a production-ready payout process with the Modern Treasury API
 
-This is an example of how to create a a simple payout system with the the Modern Treasury API.
+This is an example of how to create a simple payout system with the the Modern Treasury API.
 
 The features are:
 
