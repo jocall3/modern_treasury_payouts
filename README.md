@@ -26,11 +26,11 @@ I'm using a dead simple tech stack to minimize the overhead of learning the late
 
 Just this:
 
-  npm i
+    npm i
 
 ## Running the local server
 
-  npm run start-dev
+    npm run start-dev
 
 ## Webhooks
 
