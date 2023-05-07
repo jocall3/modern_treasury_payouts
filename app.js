@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
 import ModernTreasury from 'modern-treasury';
 
-// Your organization id and API key here:
+// Generate your API key on the MT Dashboard. The organization Id can be found 
+// there as well.
 const ORGANIZATION_ID = '<your organziation id here>';
 const API_KEY = '<your API key here>';
 const modernTreasury = new ModernTreasury({
@@ -79,8 +80,8 @@ app.get('/payout-with-ledger', async (request, response) => {
 
 app.post('/onboard', async (request, response) => {
   
-  // The MT API does not seem to support ledgers yet, so we'll use a fetch()
-  // request.
+  // The MT API does not seem to support ledgers yet so we'll use a simple 
+  // fetch() request.
   const url = 'https://app.moderntreasury.com/api/user_onboardings';
 
   const headers = new Headers({
@@ -89,7 +90,7 @@ app.post('/onboard', async (request, response) => {
       + ':' + API_KEY).toString('base64')
   });
 
-  // Example of what a request body might look like.
+  // Example of what an onboarding request body might look like.
   const body = JSON.stringify({
     status: 'processing',
     flow_alias: 'my-test-flow',
@@ -140,7 +141,7 @@ app.post('/onboard', async (request, response) => {
 
 app.post('/pay', async (request, response) => {
   
-  // Create a ACH transfer between the selected internal and external account.
+  // Create an ACH transfer between the selected internal and external account.
   const paymentOrder = await modernTreasury.paymentOrders.create({
     'type': 'ach',
     'amount': request.body.amount,
