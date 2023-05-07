@@ -38,4 +38,4 @@ Then run the server:
 
 This source includes example webhooks, which can be configured in the MT Dashboard.
 
-Use something like [ngrok](https://dashboard.ngrok.com/get-started/setup_) to expose localhost enpoints.
+Use something like [ngrok](https://dashboard.ngrok.com/get-started/setup_) to expose localhost enpoints, then paste the external links into the MT Dashboard.
