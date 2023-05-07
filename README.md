@@ -9,10 +9,10 @@ The features are:
  - A ledger for tracking transactions and account balances in real time
  - A notification system for returns and reversals via webhooks
 
- For simplicity I've all of the relevant API code in app.js.
+ For simplicity I put all of the relevant API code in app.js.
 
 ## Tech stack
-I'm using a dead simple tech stack to minimize the overhead of learning the latest framework/library/package manager:
+I'm using a minimial, accessible tech stack to help you get right to the basics of the API without the overhead of learning the latest trendy framework/library/package manager:
 
  - Vanilla JavaScript (remember that?)
  - Node.js (18)
@@ -22,16 +22,20 @@ I'm using a dead simple tech stack to minimize the overhead of learning the late
  - Nodemon (for dev)
  - [The Modern Treasury SDK](https://github.com/Modern-Treasury/modern-treasury-node)
 
-## Installation
+## Getting started
 
-Just this:
+Generate an API key in the MT Dashboard and add it to the top of app.js along with your Organization Id (also from the Dashboard).
+
+To run the local server first cd into the source folder and run this:
 
     npm i
 
-## Running the local server
+Then run the server:
 
     npm run start-dev
 
 ## Webhooks
 
-This source includes example webhooks. Use something like [ngrok](https://dashboard.ngrok.com/get-started/setup_) to expose localhost enpoints.
+This source includes example webhooks, which can be configured in the MT Dashboard.
+
+Use something like [ngrok](https://dashboard.ngrok.com/get-started/setup_) to expose localhost enpoints.
