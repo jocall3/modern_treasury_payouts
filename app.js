@@ -5,8 +5,8 @@ import ModernTreasury from 'modern-treasury';
 
 // Generate your API key on the MT Dashboard. The organization Id can be found 
 // there as well.
-const ORGANIZATION_ID = '<your organziation id here>';
-const API_KEY = '<your API key here>';
+const ORGANIZATION_ID = '7e61b1b1-e6b1-4088-8cb3-a99544dbc1c0';
+const API_KEY = 'test-ic75MC7oaPbo2AsdJyAup6YKQizDQJVBqErJBspAHpHKeuQ6EXzjc2PBgyhev3iV';
 const modernTreasury = new ModernTreasury({
   apiKey: API_KEY,
   organizationId: ORGANIZATION_ID,
@@ -158,8 +158,8 @@ app.post('/pay-with-ledger', async (request, response) => {
 
   // A ledger must reference a credit and debit account.
   // Create these accounts in the Dashboard.
-  const CREDIT_LEDGER_ACCOUNT_ID = '<credit ledger account id>';
-  const DEBIT_LEDGER_ACCOUNT_ID = '<debit ledger account id>';
+  const CREDIT_LEDGER_ACCOUNT_ID = 'f449a520-9039-4c58-b101-46951260b40c';
+  const DEBIT_LEDGER_ACCOUNT_ID = 'eae0e037-33e6-4e96-b073-6bf8aefa15fc';
 
   // Example of a ledger transaction object to be sent to the ledger.
   const ledgerTransactionObject = {
